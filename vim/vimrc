@@ -15,14 +15,13 @@ Plugin 'winmanager'
 
 " for php
 Plugin 'php.vim'
-Plugin 'php-cs-fixer'
 Plugin 'phpcomplete.vim'
 
 " for html
 Plugin 'html5.vim'
 
 " for javascript
-"Plugin 'javascript.vim'
+Plugin 'javascript.vim'
 Plugin 'jQuery'
 
 " others
