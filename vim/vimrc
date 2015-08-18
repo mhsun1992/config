@@ -7,28 +7,32 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-" general
+" Vundle, the plug-in manager for Vim
 Plugin 'gmarik/Vundle.vim'
+" Source code browser (supports C/C++, java, perl, python, tcl, sql, php, etc)
 Plugin 'taglist.vim'
-Plugin 'scrooloose/nerdtree'
+" "Buffer Explorer / Browser 
 Plugin 'bufexplorer.zip'
+" A windows style IDE for Vim
 Plugin 'winmanager'
 
-" for php
+" PHP syntax file updated for PHP 5.3
 Plugin 'php.vim'
+" Improved PHP omnicompletion
 Plugin 'phpcomplete.vim'
-
-" for html
+" HTML5 omnicomplete and syntax
 Plugin 'html5.vim'
-
-" for javascript
+" Better JavaScrirpt syntax support
 Plugin 'javascript.vim'
-Plugin 'jQuery'
 
-" others
+" Inserts matching bracket, paren, brace or quote
 Plugin 'AutoClose'
+" Vim plugin that displays tags in a window, ordered by scope
 Plugin 'Tagbar'
+" Ultimate auto-completion system for Vim
 Plugin 'neocomplcache'
+" True Sublime Text style multiple selections for Vim
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 
