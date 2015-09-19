@@ -7,31 +7,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-" Vundle, the plug-in manager for Vim
 Plugin 'gmarik/Vundle.vim'
-" Source code browser (supports C/C++, java, perl, python, tcl, sql, php, etc)
 Plugin 'taglist.vim'
-" "Buffer Explorer / Browser 
 Plugin 'bufexplorer.zip'
-" A windows style IDE for Vim
 Plugin 'winmanager'
-
-" PHP syntax file updated for PHP 5.3
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'php.vim'
-" Improved PHP omnicompletion
 Plugin 'phpcomplete.vim'
-" HTML5 omnicomplete and syntax
-"Plugin 'html5.vim'
-" Better JavaScrirpt syntax support
-"Plugin 'javascript.vim'
-
-" Inserts matching bracket, paren, brace or quote
 Plugin 'AutoClose'
 " Vim plugin that displays tags in a window, ordered by scope
 Plugin 'Tagbar'
 " Ultimate auto-completion system for Vim
 Plugin 'neocomplcache'
-" True Sublime Text style multiple selections for Vim
 Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
@@ -96,7 +84,7 @@ set foldcolumn=0
 set laststatus=2
 
 " format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \Line:\ %l
+set statusline=\ CWD:\ %r%{getcwd()}%h\ \ \Line:\ %l
 
 " C/C++ specific settings
 autocmd FileType c,cpp,cc  set cindent		" comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
@@ -118,21 +106,11 @@ end
 let mapleader="\\"
 let g:mapleader="\\"
 
-" quick alias to leave vim
-nmap <leader>w :x<CR> 
-nmap <leader>q :q!<CR>
-
-" replace the current word in all opened buffers
-map <leader>r :call Replace()<CR>
-
 " move to splitted windok
 map <leader>h :wincmd h<CR> 
 map <leader>j :wincmd j<CR> 
 map <leader>k :wincmd k<CR> 
 map <leader>l :wincmd l<CR> 
-
-" allows all window commands in insert mode
-imap <C-w> <C-o><C-w>
 
 " loop to switch windows
 nmap <S-w> :wincmd w<CR>
@@ -158,15 +136,6 @@ autocmd FileType php set errorformat=%m\ in\ %f\ on\ line\ %l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" for edit css
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-" make CSS omnicompletion work for SASS and SCSS
-autocmd BufNewFile,BufRead *.scss			set ft=scss.css
-autocmd BufNewFile,BufRead *.sass			set ft=sass.css
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " for edit html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType html,xhtml setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
@@ -182,21 +151,23 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
 
 
 """"""""""""""""""""""""""""""
-" using Tag list (ctags)
+"" plugin Tag list (ctags)
 """"""""""""""""""""""""""""""
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-let Tlist_Auto_Open=0
+let Tlist_Auto_Open=1
 let Tlist_Close_On_Select=0
 let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Show_One_File=1
+let Tlist_Show_One_File=0
+let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window=1
 let Tlist_WinWidth=25
-nmap <silent> <leader>tl :TlistToggle<cr>
+let Tlist_Inc_Winwidth = 0
+nmap <silent> tl :TlistToggle<cr>
 
 
 """"""""""""""""""""""""""""""
-" using BufExplorer
+"" plugin BufExplorer
 """"""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
@@ -207,46 +178,49 @@ let g:bufExplorerSplitVertSize=25
 let g:bufExplorerUseCurrentWindow=1
 autocmd BufWinEnter \[Buf\ List\] setl nonumber
 
+""""""""""""""""""""""""""""""
+"" plugin NERDTree
+""""""""""""""""""""""""""""""
+let g:NERDTree_title = "[NERDTree]"
+let g:nerdtree_tabs_open_on_gui_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
+
+function! NERDTree_Start() 
+    exe 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
+
 
 """"""""""""""""""""""""""""""
-" using winManager
+"" plugin winManager
 """"""""""""""""""""""""""""""
-let g:winManagerWindowLayout="FileExplorer,BufExplorer"
-let g:winManagerWidth=25
+let g:AutoOpenWinManager = 0
+let g:winManagerWindowLayout='BufExplorer'
+let g:winManagerWidth=31
 let g:defaultExplorer=0
-nmap <C-W><C-F> :FirstExplorerWindow<cr>
-nmap <C-W><C-B> :BottomExplorerWindow<cr>
-nmap <silent> <leader>wm :WMToggle<cr>
+nmap <silent> wm :call WMToggle()<cr>
+
+function! WMToggle()
+    if IsWinManagerVisible()
+        :FirstExplorerWindow        
+        :q
+        :NERDTree
+        :FirstExplorerWindow        
+    else
+        :FirstExplorerWindow        
+        :q
+        :WMToggle
+        :FirstExplorerWindow        
+    endif
+endfunction
 
 
 """"""""""""""""""""""""""""""
-" using php-cs-fixer
+"" plugin php-cs-fixer
 """"""""""""""""""""""""""""""
 nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
 nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 
-
-""""""""""""""""""""""""""""""
-" helper functions
-""""""""""""""""""""""""""""""
-fun! HasPaste()
-	if &paste
-		return '[PASTE]'
-	else
-		return ''
-	endif
-endfun
-
-fun! IncludeGuard()
-	let basename = substitute(bufname(""), '.*/', '', '')
-	let guard = '_' . substitute(toupper(basename), '\.', '_', "H") . '_'
-	call append(0, "#ifndef " . guard)
-	call append(1, "#define " . guard)
-	call append(line("$"), "#endif /* " . guard . " */")
-endfun
-
-fun! Replace() 
-	let s:word = input("Replace " . expand('<cword>') . " with:") 
-	:exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge' 
-	:unlet! s:word 
-endfun 
