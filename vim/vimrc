@@ -21,9 +21,9 @@ Plugin 'php.vim'
 " Improved PHP omnicompletion
 Plugin 'phpcomplete.vim'
 " HTML5 omnicomplete and syntax
-Plugin 'html5.vim'
+"Plugin 'html5.vim'
 " Better JavaScrirpt syntax support
-Plugin 'javascript.vim'
+"Plugin 'javascript.vim'
 
 " Inserts matching bracket, paren, brace or quote
 Plugin 'AutoClose'
@@ -73,13 +73,14 @@ set copyindent				" copy the previous indentation on autoindenting
 set ignorecase				" ignore case when searching
 set smartcase				" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set nosmarttab				" insert tabs on the start of a line according to context
+set nowrap
 
 " disable sound on errors
 set noerrorbells visualbell t_vb=
 set tm=500
 
 " tab setting
-set noexpandtab			"DO-NOT replace <TAB> with spaces
+set expandtab			"DO-NOT replace <TAB> with spaces
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -183,7 +184,7 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
 """"""""""""""""""""""""""""""
 " using Tag list (ctags)
 """"""""""""""""""""""""""""""
-let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 let Tlist_Auto_Open=0
 let Tlist_Close_On_Select=0
 let Tlist_GainFocus_On_ToggleOpen=1
