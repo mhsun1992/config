@@ -103,10 +103,10 @@ end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " useful shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader="\\"
-let g:mapleader="\\"
+let mapleader = "f"
+let g:mapleader = "f"
 
-" move to splitted windok
+" move to splitted window
 map <leader>h :wincmd h<CR> 
 map <leader>j :wincmd j<CR> 
 map <leader>k :wincmd k<CR> 
@@ -150,21 +150,16 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
 
 
+"" plugin TagBar
 """"""""""""""""""""""""""""""
-"" plugin Tag list (ctags)
-""""""""""""""""""""""""""""""
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-let Tlist_Auto_Open=1
-let Tlist_Close_On_Select=0
-let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Show_One_File=0
-let Tlist_File_Fold_Auto_Close=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=1
-let Tlist_WinWidth=25
-let Tlist_Inc_Winwidth = 0
-nmap <silent> tl :TlistToggle<cr>
-
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_iconchars = ['+', '-']
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_width = 25
+let g:tagbar_autofocus = 1
+let g:tagbar_expand = 1
+let g:tagbar_autoshowtag = 1
+nmap <silent> tb :TagbarToggle<cr>
 
 """"""""""""""""""""""""""""""
 "" plugin BufExplorer
@@ -182,8 +177,10 @@ autocmd BufWinEnter \[Buf\ List\] setl nonumber
 "" plugin NERDTree
 """"""""""""""""""""""""""""""
 let g:NERDTree_title = "[NERDTree]"
+let g:NERDTreeWinSize = 25
+let g:NERDTreeShowLineNumbers = 1
 let g:nerdtree_tabs_open_on_gui_startup = 1
-let g:nerdtree_tabs_open_on_console_startup = 0
+let g:nerdtree_tabs_open_on_console_startup = 1
 
 function! NERDTree_Start() 
     exe 'NERDTree'
@@ -198,9 +195,9 @@ endfunction
 "" plugin winManager
 """"""""""""""""""""""""""""""
 let g:AutoOpenWinManager = 0
-let g:winManagerWindowLayout='BufExplorer'
-let g:winManagerWidth=31
-let g:defaultExplorer=0
+let g:winManagerWindowLayout = 'BufExplorer'
+let g:winManagerWidth = 25
+let g:defaultExplorer = 0
 nmap <silent> wm :call WMToggle()<cr>
 
 function! WMToggle()
