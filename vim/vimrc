@@ -89,16 +89,6 @@ set statusline=\ CWD:\ %r%{getcwd()}%h\ \ \Line:\ %l/%L
 " C/C++ specific settings
 autocmd FileType c,cpp,cc  set cindent		" comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" font setting
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_gtk2")
-    set guifont=DejaVu\ Sans\ Mono\ 11
-elseif has("gui_macvim")
-	set guifont=DejaVu_Sans_Mono:h11
-elseif has("gui_win32")
-	set guifont=DejaVu_Sans_Mono:h11
-end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " useful shortcuts
@@ -213,11 +203,4 @@ function! WMToggle()
         :FirstExplorerWindow        
     endif
 endfunction
-
-
-""""""""""""""""""""""""""""""
-"" plugin php-cs-fixer
-""""""""""""""""""""""""""""""
-nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
-nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 
