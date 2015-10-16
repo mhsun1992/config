@@ -18,10 +18,5 @@ foreach ($output_list as $output)
     }
 }
 
-if ($exit_status)
-{
-    echo "\n";
-}
-
 exit($exit_status);
 

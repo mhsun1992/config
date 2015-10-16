@@ -170,7 +170,7 @@ let g:NERDTree_title = "[NERDTree]"
 let g:NERDTreeWinSize = 25
 let g:NERDTreeShowLineNumbers = 1
 let g:nerdtree_tabs_open_on_gui_startup = 1
-let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
 
 function! NERDTree_Start() 
     exe 'NERDTree'
