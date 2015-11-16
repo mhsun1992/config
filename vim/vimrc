@@ -6,28 +6,21 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
-Plugin 'taglist.vim'
 Plugin 'bufexplorer.zip'
-Plugin 'winmanager'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'php.vim'
 Plugin 'phpcomplete.vim'
 Plugin 'AutoClose'
-" Vim plugin that displays tags in a window, ordered by scope
+Plugin 'mileszs/ack.vim'
 Plugin 'Tagbar'
-" Ultimate auto-completion system for Vim
 Plugin 'neocomplcache'
 Plugin 'terryma/vim-multiple-cursors'
-
 call vundle#end()
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " general settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set bs=indent,eol,start	" allow backspacing over everything in insert mode
 set history=100			" keep 100 lines of command line history
 set ruler				" show the cursor position all the time
@@ -68,35 +61,23 @@ set noerrorbells visualbell t_vb=
 set tm=500
 
 " tab setting
-set expandtab			"DO-NOT replace <TAB> with spaces
+set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-autocmd FileType yaml set expandtab
+set linespace=3
 
-" folding
-set foldenable
-set foldmethod=marker
-set foldlevel=0
-set foldcolumn=0
-
-" always show the status line
+"" always show the status line
 set laststatus=2
 
-" format the status line
+"" format the status line
 set statusline=\ CWD:\ %r%{getcwd()}%h\ \ \Line:\ %l/%L
 
-" C/C++ specific settings
-autocmd FileType c,cpp,cc  set cindent		" comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" useful shortcuts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" useful shortcuts
 let mapleader = "f"
 let g:mapleader = "f"
 
-" move to splitted window
+"" move to splitted window
 map <leader>h :wincmd h<CR> 
 map <leader>j :wincmd j<CR> 
 map <leader>k :wincmd k<CR> 
@@ -105,35 +86,7 @@ map <leader>l :wincmd l<CR>
 " loop to switch windows
 nmap <S-w> :wincmd w<CR>
 
-" new tab
-map <C-t><C-t> :tabnew .<CR>
-" close tab
-map <C-t><C-w> :tabclose<CR> 
-
-" ;/ turn off search highlighting
-nmap <leader>/ :set hls!<CR>
-nnoremap <silent><leader>s :nohlsearch<CR>
-
-" :cd. change working directory to that of the current file
-cmap cd. lcd %:p:h
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" for PHP programming
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType php set makeprg=php\ -l\ %
-autocmd FileType php set errorformat=%m\ in\ %f\ on\ line\ %l
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" for edit html
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType html,xhtml setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" encoding settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" encoding settings
 set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -141,66 +94,34 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
 
 
 "" plugin TagBar
-""""""""""""""""""""""""""""""
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_show_linenumbers = 1
-let g:tagbar_width = 25
+let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
-let g:tagbar_expand = 1
+let g:tagbar_autoclose = 0
 let g:tagbar_autoshowtag = 1
 nmap <silent> tb :TagbarToggle<cr>
+nmap <silent> ta :TagbarOpenAutoClose<cr>
 
-""""""""""""""""""""""""""""""
+
 "" plugin BufExplorer
-""""""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerSortBy='mru'
-let g:bufExplorerSplitRight=0
-let g:bufExplorerSplitVertical=1
-let g:bufExplorerSplitVertSize=25
-let g:bufExplorerUseCurrentWindow=1
-autocmd BufWinEnter \[Buf\ List\] setl nonumber
+let g:bufExplorerDefaultHelp = 0
+let g:bufExplorerSortBy = 'mru'
+let g:bufExplorerSplitRight = 1
+let g:bufExplorerSplitVertSize = 0
+let g:bufExplorerSplitBelow = 1
+let g:bufExplorerSplitHorzSize = 0
+nmap <silent> be :BufExplorer<cr>
+nmap <silent> bh :BufExplorerHorizontalSplit<cr>
+nmap <silent> bv :BufExplorerVerticalSplit<cr>
 
-""""""""""""""""""""""""""""""
+
 "" plugin NERDTree
-""""""""""""""""""""""""""""""
 let g:NERDTree_title = "[NERDTree]"
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 30
 let g:NERDTreeShowLineNumbers = 1
 let g:nerdtree_tabs_open_on_gui_startup = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
-
-function! NERDTree_Start() 
-    exe 'NERDTree'
-endfunction
-
-function! NERDTree_IsValid()
-    return 1
-endfunction
-
-
-""""""""""""""""""""""""""""""
-"" plugin winManager
-""""""""""""""""""""""""""""""
-let g:AutoOpenWinManager = 0
-let g:winManagerWindowLayout = 'BufExplorer'
-let g:winManagerWidth = 25
-let g:defaultExplorer = 0
-nmap <silent> wm :call WMToggle()<cr>
-
-function! WMToggle()
-    if IsWinManagerVisible()
-        :FirstExplorerWindow        
-        :q
-        :NERDTree
-        :FirstExplorerWindow        
-    else
-        :FirstExplorerWindow        
-        :q
-        :WMToggle
-        :FirstExplorerWindow        
-    endif
-endfunction
+nmap <silent> nt :NERDTreeToggle<cr>
 
