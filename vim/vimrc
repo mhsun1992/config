@@ -65,13 +65,11 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set linespace=3
+set linespace=5
 
 "" always show the status line
 set laststatus=2
-
-"" format the status line
-set statusline=\ CWD:\ %r%{getcwd()}%h\ \ \Line:\ %l/%L
+set statusline=\ CWD:\ %{getcwd()}%h\ \ Encode:\ %{&fenc}\ \ Line:\ %l/%L
 
 "" useful shortcuts
 let mapleader = "f"
