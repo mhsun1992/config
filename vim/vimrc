@@ -69,7 +69,8 @@ set linespace=5
 
 "" always show the status line
 set laststatus=2
-set statusline=\ CWD:\ %{getcwd()}%h\ \ Encode:\ %{&fenc}\ \ Line:\ %l/%L
+set titlestring=%{expand('%')}
+set statusline=\ CWD:\ %{getcwd()}\ \ Encode:\ %{&fenc}\ \ Line:\ %l/%L
 
 "" useful shortcuts
 let mapleader = "f"
