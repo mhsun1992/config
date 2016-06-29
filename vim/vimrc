@@ -13,10 +13,13 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'php.vim'
 Plugin 'phpcomplete.vim'
 Plugin 'AutoClose'
-Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'Tagbar'
 Plugin 'neocomplcache'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mattn/emmet-vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
 
@@ -55,6 +58,10 @@ set ignorecase				" ignore case when searching
 set smartcase				" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set nosmarttab				" insert tabs on the start of a line according to context
 set nowrap
+set fdm=indent
+set foldlevel=1
+
+colorscheme desert
 
 " disable sound on errors
 set noerrorbells visualbell t_vb=
@@ -65,7 +72,7 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set linespace=5
+set linespace=6
 
 "" always show the status line
 set laststatus=2
@@ -90,6 +97,9 @@ set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
+
+"" ctags
+set tags=tags;/
 
 
 "" plugin TagBar
@@ -117,10 +127,17 @@ nmap <silent> bv :BufExplorerVerticalSplit<cr>
 
 
 "" plugin NERDTree
-let g:NERDTree_title = "[NERDTree]"
+let g:NERDTree_title = "NERDTree]"
 let g:NERDTreeWinSize = 30
 let g:NERDTreeShowLineNumbers = 1
 let g:nerdtree_tabs_open_on_gui_startup = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 nmap <silent> nt :NERDTreeToggle<cr>
 
+"" plugin ag.vim
+let g:ag_prg = 'ag --nogroup --nocolor --column'
+let g:ag_working_path_mode="r"
+
+"" plugin emmet.vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
