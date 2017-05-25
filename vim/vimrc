@@ -7,28 +7,25 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'bufexplorer.zip'
+Plugin 'vim-scripts/bufexplorer.zip'
+Plugin 'vim-scripts/AutoClose'
+Plugin 'vim-scripts/Tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'php.vim'
-Plugin 'phpcomplete.vim'
-Plugin 'AutoClose'
 Plugin 'rking/ag.vim'
-Plugin 'Tagbar'
-Plugin 'neocomplcache'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mattn/emmet-vim'
 Plugin 'mxw/vim-jsx'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
+Plugin 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 call vundle#end()
-
 
 " general settings
 set bs=indent,eol,start	" allow backspacing over everything in insert mode
-set history=100			" keep 100 lines of command line history
-set ruler				" show the cursor position all the time
-set ar					" auto read when file is changed from outside
-set nu					" show line numbers
+set history=100         " keep 100 lines of command line history
+set ruler               " show the cursor position all the time
+set autoread            " auto read when file is changed from outside
+set number              " show line numbers
+set relativenumber
 
 filetype on				" Enable filetype detection
 filetype indent on		" Enable filetype-specific indenting
@@ -47,9 +44,7 @@ set wildchar=<TAB>		" start wild expansion in the command line using <TAB>
 set wildmenu			" wild char completion menu
 
 " ignore these files while expanding wild chars
-set wildignore+=.svn,CVS,.git 
-set wildignore+=*.o,*.a,*.class,*.mo,*.la,*.so,*.lo,*.la,*.obj,*.pyc
-set wildignore+=*.exe,*.zip,*.jpg,*.png,*.gif,*.jpeg 
+set wildignore+=.git 
 
 set autoindent				" auto indentation
 set incsearch				" incremental search
@@ -92,15 +87,14 @@ map <leader>l :wincmd l<CR>
 " loop to switch windows
 nmap <S-w> :wincmd w<CR>
 
-"" encoding settings
+" encoding settings
 set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,latin1
 
-"" ctags
+" ctags
 set tags=tags;/
-
 
 "" plugin TagBar
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -134,10 +128,29 @@ let g:nerdtree_tabs_open_on_gui_startup = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 nmap <silent> nt :NERDTreeToggle<cr>
 
+
 "" plugin ag.vim
+"" brew install the_silver_searcher
 let g:ag_prg = 'ag --nogroup --nocolor --column'
 let g:ag_working_path_mode="r"
 
-"" plugin emmet.vim
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+
+"" plugin nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 0
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+" [count]<leader>cc 单行注释
+" [count]<leader>cm 多行注释
+" [count]<leader>cl 多行单行注释
+" [count]<leader>cu 取消注释
+
+
+"" plugin ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = {'dir': '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(swp|zip|exe|so|dll)$', 'link': 'some_bad_symbolic_links' }
+nmap <leader>p :CtrlP<cr>
