@@ -16,3 +16,5 @@ vim
 
 参考：https://github.com/VundleVim/Vundle.vim
 
+// 使用macvim中的vim替换系统vim
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'

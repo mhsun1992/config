@@ -12,6 +12,7 @@ Plugin 'vim-scripts/AutoClose'
 Plugin 'vim-scripts/Tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'AutoClose'
 Plugin 'rking/ag.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mxw/vim-jsx'
@@ -21,10 +22,10 @@ call vundle#end()
 
 " general settings
 set bs=indent,eol,start	" allow backspacing over everything in insert mode
-set history=100         " keep 100 lines of command line history
-set ruler               " show the cursor position all the time
-set autoread            " auto read when file is changed from outside
-set number              " show line numbers
+set history=100			" keep 100 lines of command line history
+set ruler				" show the cursor position all the time
+set ar					" auto read when file is changed from outside
+set number		        " show line numbers
 set relativenumber
 
 filetype on				" Enable filetype detection
@@ -53,8 +54,8 @@ set ignorecase				" ignore case when searching
 set smartcase				" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set nosmarttab				" insert tabs on the start of a line according to context
 set nowrap
-set fdm=indent
-set foldlevel=1
+set foldmethod=indent
+set foldlevel=0
 
 colorscheme desert
 
@@ -65,9 +66,14 @@ set tm=500
 " tab setting
 set expandtab
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
 set linespace=6
+autocmd Filetype ruby set tabstop=2 | set shiftwidth=2 | set softtabstop=2
+autocmd Filetype javascript set tabstop=2 | set shiftwidth=2 | set softtabstop=2
+autocmd Filetype html set tabstop=2 | set shiftwidth=2 | set softtabstop=2
+autocmd Filetype vue set tabstop=2 | set shiftwidth=2 | set softtabstop=2
+autocmd Filetype php set tabstop=4 | set shiftwidth=4 | set softtabstop=4
 
 "" always show the status line
 set laststatus=2
@@ -134,7 +140,6 @@ nmap <silent> nt :NERDTreeToggle<cr>
 let g:ag_prg = 'ag --nogroup --nocolor --column'
 let g:ag_working_path_mode="r"
 
-
 "" plugin nerdcommenter
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 0
@@ -147,7 +152,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " [count]<leader>cm 多行注释
 " [count]<leader>cl 多行单行注释
 " [count]<leader>cu 取消注释
-
 
 "" plugin ctrlp
 let g:ctrlp_map = '<c-p>'
