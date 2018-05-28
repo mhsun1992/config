@@ -12,7 +12,6 @@ Plugin 'vim-scripts/AutoClose'
 Plugin 'vim-scripts/Tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'AutoClose'
 Plugin 'rking/ag.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mxw/vim-jsx'
@@ -77,8 +76,9 @@ autocmd Filetype php set tabstop=4 | set shiftwidth=4 | set softtabstop=4
 
 "" always show the status line
 set laststatus=2
-set titlestring=%{expand('%')}
-set statusline=\ CWD:\ %{getcwd()}\ \ Encode:\ %{&fenc}\ \ Line:\ %l/%L
+set titlestring=%{expand(\"%:~:.:h\")}/%t%(\ %M%)
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
+set statusline=%=\ Encode:\ %{&fenc}\ \ Line:\ %l/%L\ %P
 
 "" useful shortcuts
 let mapleader = "f"
