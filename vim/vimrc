@@ -14,9 +14,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'rking/ag.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mxw/vim-jsx'
 Plugin 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 Plugin 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'paredit.vim'
 call vundle#end()
 
 " general settings
@@ -47,6 +50,7 @@ set wildmenu			" wild char completion menu
 set wildignore+=.git 
 
 set autoindent				" auto indentation
+set smartindent				" smart indentation
 set incsearch				" incremental search
 set copyindent				" copy the previous indentation on autoindenting
 set ignorecase				" ignore case when searching
@@ -110,6 +114,9 @@ let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 0
 let g:tagbar_autoshowtag = 1
+let g:tagbar_type_javascript = {
+            \   'ctagstype': 'javascript'
+            \ }
 nmap <silent> tb :TagbarToggle<cr>
 nmap <silent> ta :TagbarOpenAutoClose<cr>
 
@@ -158,3 +165,4 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {'dir': '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(swp|zip|exe|so|dll)$', 'link': 'some_bad_symbolic_links' }
 nmap <leader>p :CtrlP<cr>
+
