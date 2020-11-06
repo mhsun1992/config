@@ -16,10 +16,11 @@ Plugin 'rking/ag.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 Plugin 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'leafgarland/typescript-vim'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'leafgarland/typescript-vim'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'paredit.vim'
+Plugin 'posva/vim-vue'
 call vundle#end()
 
 " general settings
@@ -68,15 +69,10 @@ set tm=500
 
 " tab setting
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set linespace=6
-autocmd Filetype ruby set tabstop=2 | set shiftwidth=2 | set softtabstop=2
-autocmd Filetype javascript set tabstop=2 | set shiftwidth=2 | set softtabstop=2
-autocmd Filetype typescript set tabstop=2 | set shiftwidth=2 | set softtabstop=2
-autocmd Filetype html set tabstop=2 | set shiftwidth=2 | set softtabstop=2
-autocmd Filetype vue set tabstop=2 | set shiftwidth=2 | set softtabstop=2
 autocmd Filetype php set tabstop=4 | set shiftwidth=4 | set softtabstop=4
 
 "" always show the status line
